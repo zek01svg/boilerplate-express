@@ -29,8 +29,6 @@ app.get('/now', function logTime (req, res, next) {
     res.json({"time": req.time})
 })
 
-
-
 app.get('/json', (req, res)=>{
     if (process.env.MESSAGE_STYLE == 'uppercase') {
         res.json({"message": "HELLO JSON"})
@@ -40,5 +38,19 @@ app.get('/json', (req, res)=>{
     }
     
 })
+
+app.get('/:word/echo', (req, res) => {
+    res.json({echo:req.params.word})
+})
+
+app.get('/name',(req, res) => {
+    const first = req.query.first
+    const last = req.query.last
+    res.json({ name: `${first} ${last}`})
+})
+app.post('/name',(req, res) => {
+    res.json({"name": req.query.name})
+})
+
 
 module.exports = app;
